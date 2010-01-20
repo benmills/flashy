@@ -5,25 +5,39 @@ package {
 	public class fy extends Sprite {
 		public var target:*;
 		public static var events:Object = {
-			"mouseDown": MouseEvent.MOUSE_DOWN
+			mouseDown: MouseEvent.MOUSE_DOWN,
+			mouseUp: MouseEvent.MOUSE_UP,
+			mouseOver: MouseEvent.MOUSE_OVER,
+			mouseOut: MouseEvent.MOUSE_OUT,
+			click: MouseEvent.CLICK
 		}
+		
+		// Flashy Object
 		
 		public function fy(t:*) {
 			this.target = t;
 		}
 		
-		public function config(args:Object):* {
+		public function config(args:Object):fy {
 			this.target = fy.config(this.target, args);
 			return this;
 		}
 		
-		public function bind(args:Object):void {
-		  for(var i:String in args) this.target.addEventListener(events[i], args[i]);
+		public function bind(args:Object):fy {
+			fy.bind(this.target, args);
+			return this;
+		}
+		
+		public function addChildren(children:Array):fy {
+			fy.addChildren(this.target, children);
+			return this;
 		}
 		
 		public static function $(t:*):fy {
 			return new fy(t);
 		}
+		
+		// Builders
 		
 		public static function config(target:*, args:Object):* {
 			// Speical Artributes
@@ -51,5 +65,44 @@ package {
 
 			return target;
 		}
+		
+		public static function bind(target:*, args:Object):void {
+		  for(var i:String in args) target.addEventListener(events[i], args[i]);
+		}
+
+		// Utilities
+
+		public static function addChildren(parent:Sprite, children:Array):void {
+			for each (var child:* in children) parent.addChild(child);
+		}
+
+		public static function arrayContains(target:*, a:Array):Boolean {
+			var doesNotContain:Boolean = false;
+			return a.some(function(e:*, i:int, ar:Array):Boolean {
+				var contains:Boolean = false;
+				if (target is Array) {
+					for(var ii:String in target) if (!arrayContains(target[ii], a)) doesNotContain = true;
+					contains = doesNotContain? false:true;
+				} else contains = (e == target);
+				return contains;
+			});
+		}
+
+		// Debug / Development
+
+		public function position(target:Sprite):void {
+			trace("fy: init positioning on "+target);
+			target.addEventListener(MouseEvent.MOUSE_DOWN, function():void {
+				target.startDrag();
+			});
+			target.addEventListener(MouseEvent.MOUSE_UP, function():void {
+				target.stopDrag();
+				trace("- - - - - - - -");
+				trace("[taret: "+target+"] x:"+target.x+", y:"+target.y);
+				trace("- - - - - - - -");
+			});
+		}
 	}
+	
+
 }
