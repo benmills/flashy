@@ -96,7 +96,7 @@ package {
 		Example usage of findItem:
 
 		var names:Array = ["Ben", "Jess", "Jack"];
-		var returnValue:String = findItem(function(i:String):Boolean{return (i == "Jess")}, names);
+		var returnValue:String = fy.findItem(function(i:String):Boolean{return (i == "Jess")}, names);
 		trace(returnValue); // output: "Ben"
 		*/
 		
@@ -107,7 +107,7 @@ package {
 
 		// Debug / Development
 
-		public function position(target:Sprite):void {
+		public static function position(target:Sprite):void {
 			trace("fy: init positioning on "+target);
 			target.addEventListener(MouseEvent.MOUSE_DOWN, function():void {
 				target.startDrag();
