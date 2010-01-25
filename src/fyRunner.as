@@ -1,6 +1,7 @@
 package {
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.*;
 	import asunit.textui.TestRunner;
 	
 	public class fyRunner extends TestRunner {
@@ -8,8 +9,23 @@ package {
 		public function fyRunner() {
 			trace("Started Testing");
 			
+			var map:Sprite = fy.config(new Sprite(), {x:50, y:50, width:200, height:200, backgroundColor:0xFF0000, alpha:0.8});
+			var bound:Sprite = fy.config(new Sprite(), {x:50, y:50, width:map.width*2, height:map.height*2, parent:this, alpha:0.3, backgroundColor:0x0000FF});
+			addChild(map);
+			
+			fy.bind(map, {
+				mouseDown: function():void {
+					map.startDrag(false, new Rectangle(0, 0, bound.width-map.width, bound.height-map.height));
+				},
+				mouseUp: function():void {
+					map.stopDrag();
+				}
+			})
+
+			//map.startDrag()
+			
 			// fy object
-			fy.$(new Sprite()).config({
+			/*fy.$(new Sprite()).config({
 				parent:this, 
 				backgroundColor:0xFF0000, 
 				width:50, height:50, 
@@ -32,7 +48,7 @@ package {
 			trace("does testArray contain 1, 2 and 4 (e:True)? "+fy.arrayContains([1, 2, 4], testArray));
 			
 			testArray = [1, 2, 4];
-			trace("does testArray contain 1, 2 and 4 (e:True)? "+fy.arrayContains([1, 2, 4], testArray));
+			trace("does testArray contain 1, 2 and 4 (e:True)? "+fy.arrayContains([1, 2, 4], testArray));*/
 		}
 	}
 }

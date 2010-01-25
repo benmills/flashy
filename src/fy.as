@@ -87,6 +87,23 @@ package {
 				return contains;
 			});
 		}
+		
+		/*
+		findItem Function, takes in a tester function and a array (or XML) and when tester function returns true findItem will return the current item. If the item does not exist it will return null
+
+		The tester function must have a return type of Boolean and its only argument must be the item type of the list.
+
+		Example usage of findItem:
+
+		var names:Array = ["Ben", "Jess", "Jack"];
+		var returnValue:String = findItem(function(i:String):Boolean{return (i == "Jess")}, names);
+		trace(returnValue); // output: "Ben"
+		*/
+		
+		public static function findItem(func:Function, list:*):* {
+			for each (var i:* in list) if (func(i)) return i;
+			return null;
+		}
 
 		// Debug / Development
 
