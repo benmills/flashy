@@ -77,6 +77,10 @@ package {
 		}
 
 		public static function arrayContains(target:*, a:Array):Boolean {
+			if (a.length == 0) {
+				if (target is Array && target.length == 0) return true;
+				return false;
+			}
 			var doesNotContain:Boolean = false;
 			return a.some(function(e:*, i:int, ar:Array):Boolean {
 				var contains:Boolean = false;

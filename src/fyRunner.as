@@ -25,7 +25,7 @@ package {
 			//map.startDrag()
 			
 			// fy object
-			/*fy.$(new Sprite()).config({
+			fy.$(new Sprite()).config({
 				parent:this, 
 				backgroundColor:0xFF0000, 
 				width:50, height:50, 
@@ -48,7 +48,11 @@ package {
 			trace("does testArray contain 1, 2 and 4 (e:True)? "+fy.arrayContains([1, 2, 4], testArray));
 			
 			testArray = [1, 2, 4];
-			trace("does testArray contain 1, 2 and 4 (e:True)? "+fy.arrayContains([1, 2, 4], testArray));*/
+			trace("does testArray contain 1, 2 and 4 (e:True)? "+fy.arrayContains([1, 2, 4], testArray));
+			
+			testArray = [];
+			trace("does testArray contain 1 (e:False)? "+fy.arrayContains(1, testArray));
+			trace("does testArray contain [] (e:True)? "+fy.arrayContains([], testArray));
 		}
 	}
 }
