@@ -40,6 +40,8 @@ package {
 		// Builders
 		
 		public static function config(target:*, args:Object):* {
+			if (target is Class) target = new target();
+			
 			// Speical Artributes
 			if (args.parent) {
 				args.parent.addChild(target) as Sprite;

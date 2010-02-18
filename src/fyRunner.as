@@ -9,7 +9,7 @@ package {
 		public function fyRunner() {
 			trace("Started Testing");
 			
-			var map:Sprite = fy.config(new Sprite(), {x:50, y:50, width:200, height:200, backgroundColor:0xFF0000, alpha:0.8});
+			/*var map:Sprite = fy.config(new Sprite(), {x:50, y:50, width:200, height:200, backgroundColor:0xFF0000, alpha:0.8});
 			var bound:Sprite = fy.config(new Sprite(), {x:50, y:50, width:map.width*2, height:map.height*2, parent:this, alpha:0.3, backgroundColor:0x0000FF});
 			addChild(map);
 			
@@ -20,11 +20,22 @@ package {
 				mouseUp: function():void {
 					map.stopDrag();
 				}
-			})
-
-			//map.startDrag()
+			})*/
 			
-			// fy object
+			var box:Sprite = fy.config(Sprite, {width:10, height:10, backgroundColor:0xFF0000, parent:this});
+			
+			fy.bind(box, {
+			  mouseOver: function(e:Event) {
+			    e.target.alpha = 0.5;
+			  },
+			  mouseOut: function(e:Event) {
+			    e.target.alpha = 1;
+			  }
+				});
+
+
+			
+			/*// fy object
 			fy.$(new Sprite()).config({
 				parent:this, 
 				backgroundColor:0xFF0000, 
@@ -37,7 +48,7 @@ package {
 			).addChildren([
 				fy.config(new Sprite(), {width:5, height:5, x:5, y:5, backgroundColor:0x00FF00}),
 				fy.config(new Sprite(), {width:5, height:5, x:5, y:15, backgroundColor:0x00FF00})
-			]);
+			]);*/
 			
 			// array contains
 			var testArray:Array = [1, 2, 4, 5];
